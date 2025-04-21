@@ -1,0 +1,84 @@
+import pygame
+import random
+import sys
+
+
+# Размеры окна в пикселях
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+
+CELL_SIZE = 20
+
+# Размеры сетки в ячейках
+WIDTH = int(WINDOW_WIDTH / CELL_SIZE)
+HEIGHT = int(WINDOW_HEIGHT / CELL_SIZE)
+
+# Цвета
+BG_COLOR = (0, 0, 0)
+GRID_COLOR = (40, 40, 40)
+APPLE_COLOR = (255, 0, 0)
+APPLE_OUTER_COLOR = (155, 0, 0)
+SNAKE_COLOR = (0, 255, 0)
+SNAKE_OUTER_COLOR = (0, 155, 0)
+
+COLOR_GREEN = (0, 255, 0)
+COLOR_WHITE = (255, 255, 255)
+COLOR_BLUE = (0, 0, 255)
+
+
+
+UP = 'up'
+DOWN = 'down'
+LEFT = 'left'
+RIGHT = 'right'
+
+HEAD = 0
+
+
+FPS = 15
+
+
+class Cell:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+def main(): 
+    global FPS_CLOCK
+    global DISPLAY
+
+    pygame.init()
+    FPS_CLOCK = pygame.time.Clock()
+    DISPLAY = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    DISPLAY.fill(COLOR_GREEN)
+
+    pygame.display.set_caption('Snake')
+
+    player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
+
+
+    while True:
+        run_game()
+
+
+def run_game():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+
+        keys = pygame.key.get_pressed()
+
+
+        FPS_CLOCK.tick(FPS)
+        
+
+
+def terminate():
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == '__main__':
+    main()

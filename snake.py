@@ -1,13 +1,14 @@
 import pygame
 import random
 import sys
+import grid
 
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
-CELL_SIZE = 20
+CELL_SIZE = 40
 
 # Размеры сетки в ячейках
 WIDTH = int(WINDOW_WIDTH / CELL_SIZE)
@@ -26,7 +27,7 @@ COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
 
 
-
+# game managing
 UP = 'up'
 DOWN = 'down'
 LEFT = 'left'
@@ -34,8 +35,10 @@ RIGHT = 'right'
 
 HEAD = 0
 
-
+# game settings
 FPS = 15
+screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
+pygame.init() # initialization of pygame
 
 
 class Cell:
@@ -69,9 +72,15 @@ def run_game():
                 terminate()
 
         keys = pygame.key.get_pressed()
-
+        #screen color
+        screen.fill((100, 60, 60))
+        # grid drawing
+        grd = grid.Grid(COLOR_GREEN, screen, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
+        grd.grid_drawing()
+        
 
         FPS_CLOCK.tick(FPS)
+        pygame.display.flip()
         
 
 

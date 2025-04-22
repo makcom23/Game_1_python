@@ -2,6 +2,7 @@ import pygame
 import random
 import sys
 import grid
+import apple
 
 
 # Размеры окна в пикселях
@@ -26,6 +27,7 @@ COLOR_GREEN = (0, 255, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
 COLOR_BACKGROUND = (100, 60, 60)
+COLOR_APPLE = (200, 30, 30)
 
 # game managing
 UP = 'up'
@@ -37,7 +39,6 @@ HEAD = 0
 
 # game settings
 FPS = 15
-#screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
 pygame.init() # initialization of pygame
 
 
@@ -60,12 +61,13 @@ def main():
 
     #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
     grd = grid.Grid(COLOR_GREEN, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
+    apl = apple.Apple(DISPLAY, COLOR_APPLE )
 
    
-    run_game(grd)
+    run_game(grd, apl)
 
 
-def run_game(grd):
+def run_game(grd, apl):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -75,6 +77,9 @@ def run_game(grd):
        
         # grid drawing
         grd.grid_drawing()
+
+        # apple drawing
+        apl.creating_apple()
         
 
         FPS_CLOCK.tick(FPS)

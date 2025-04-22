@@ -3,7 +3,7 @@ import random
 import sys
 import grid
 import apple
-
+import save_results
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
@@ -17,7 +17,7 @@ HEIGHT = int(WINDOW_HEIGHT / CELL_SIZE)
 
 # Цвета
 BG_COLOR = (0, 0, 0)
-GRID_COLOR = (40, 40, 40)
+GRID_COLOR = (40, 100, 40)
 APPLE_COLOR = (255, 0, 0)
 APPLE_OUTER_COLOR = (155, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
@@ -26,8 +26,7 @@ SNAKE_OUTER_COLOR = (0, 155, 0)
 COLOR_GREEN = (0, 255, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
-COLOR_BACKGROUND = (100, 60, 60)
-COLOR_APPLE = (200, 30, 30)
+COLOR_BACKGROUND = (50, 30, 30)
 
 # game managing
 UP = 'up'
@@ -35,7 +34,7 @@ DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
 
-HEAD = 0
+HEAD = 0    
 
 # game settings
 FPS = 15
@@ -60,8 +59,9 @@ def main():
     pygame.display.set_caption('Snake')
 
     #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
-    grd = grid.Grid(COLOR_GREEN, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
-    apl = apple.Apple(DISPLAY, COLOR_APPLE )
+    grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
+    apl = apple.Apple(DISPLAY)
+    apl.creating_new_apple()
 
    
     run_game(grd, apl)
@@ -75,11 +75,14 @@ def run_game(grd, apl):
 
         keys = pygame.key.get_pressed()
        
+        # input name
+        save_res.save_name()
+        
         # grid drawing
         grd.grid_drawing()
 
         # apple drawing
-        apl.creating_apple()
+        apl.drawing_apple()
         
 
         FPS_CLOCK.tick(FPS)

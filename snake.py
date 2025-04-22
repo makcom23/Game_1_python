@@ -8,7 +8,7 @@ import grid
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
-CELL_SIZE = 40
+CELL_SIZE = 20
 
 # Размеры сетки в ячейках
 WIDTH = int(WINDOW_WIDTH / CELL_SIZE)
@@ -25,7 +25,7 @@ SNAKE_OUTER_COLOR = (0, 155, 0)
 COLOR_GREEN = (0, 255, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
-
+COLOR_BACKGROUND = (100, 60, 60)
 
 # game managing
 UP = 'up'
@@ -37,7 +37,7 @@ HEAD = 0
 
 # game settings
 FPS = 15
-screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
+#screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
 pygame.init() # initialization of pygame
 
 
@@ -54,28 +54,26 @@ def main():
     pygame.init()
     FPS_CLOCK = pygame.time.Clock()
     DISPLAY = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    DISPLAY.fill(COLOR_GREEN)
+    DISPLAY.fill(COLOR_BACKGROUND)
 
     pygame.display.set_caption('Snake')
 
-    player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
+    #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
+    grd = grid.Grid(COLOR_GREEN, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
+
+   
+    run_game(grd)
 
 
-    while True:
-        run_game()
-
-
-def run_game():
+def run_game(grd):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
 
         keys = pygame.key.get_pressed()
-        #screen color
-        screen.fill((100, 60, 60))
+       
         # grid drawing
-        grd = grid.Grid(COLOR_GREEN, screen, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
         grd.grid_drawing()
         
 

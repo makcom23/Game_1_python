@@ -4,6 +4,8 @@ import sys
 import grid
 import apple
 import save_results
+import pygame_textinput
+import textinput as txt
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
@@ -62,12 +64,13 @@ def main():
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apl = apple.Apple(DISPLAY)
     apl.creating_new_apple()
+    text = txt.text_input(DISPLAY)
 
    
-    run_game(grd, apl)
+    run_game(grd, apl, text)
 
 
-def run_game(grd, apl):
+def run_game(grd, apl, text):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -76,13 +79,16 @@ def run_game(grd, apl):
         keys = pygame.key.get_pressed()
        
         # input name
-        save_res.save_name()
-        
+        #save_res.save_name()
+
         # grid drawing
         grd.grid_drawing()
 
         # apple drawing
         apl.drawing_apple()
+
+        #name input
+        text.input()
         
 
         FPS_CLOCK.tick(FPS)

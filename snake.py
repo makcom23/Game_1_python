@@ -6,6 +6,7 @@ import apple
 import save_results
 import pygame_textinput
 import textinput as txt
+import first_window as fwnd
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
@@ -29,6 +30,10 @@ COLOR_GREEN = (0, 255, 0)
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
 COLOR_BACKGROUND = (50, 30, 30)
+COLOR_FIRSTWIND = (50, 80, 150)
+
+# variables
+game_state = 0
 
 # game managing
 UP = 'up'
@@ -65,12 +70,12 @@ def main():
     apl = apple.Apple(DISPLAY)
     apl.creating_new_apple()
     text = txt.text_input(DISPLAY)
-
+    fstwin = fwnd.First_Window(DISPLAY, COLOR_FIRSTWIND)
    
-    run_game(grd, apl, text)
+    run_game(grd, apl, text, fstwin)
 
 
-def run_game(grd, apl, text):
+def run_game(grd, apl, text, fstwin):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -82,14 +87,18 @@ def run_game(grd, apl, text):
         #save_res.save_name()
 
         # grid drawing
-        grd.grid_drawing()
-
+        if game_state == 2:
+            grd.grid_drawing()
         # apple drawing
-        apl.drawing_apple()
+            apl.drawing_apple()
 
         #name input
-        text.input()
-        
+        if game_state == 1:
+            text.input()
+
+        # first window
+        if game_state == 0:
+            fstwin.rectangles()
 
         FPS_CLOCK.tick(FPS)
         pygame.display.flip()

@@ -1,6 +1,7 @@
 # pygame textinput
 import pygame
 import pygame_textinput
+import save_results as sr
 pygame.init()
 
 class text_input:
@@ -24,6 +25,13 @@ class text_input:
             screen.blit(textinput.surface, (10, 10))
 
             for event in events:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                    print(f"User pressed enter! Input so far: {textinput.value}")
+                    name = textinput.value
+                    saveres = sr.save_res()
+                    saveres.save_name(name)
+                    exit()
+
                 if event.type == pygame.QUIT:
                     exit()
 

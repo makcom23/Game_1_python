@@ -1,47 +1,62 @@
 # class first window
 import pygame
+import Button
+import sys
+import settings as stts
 
 class First_Window:
-    def __init__(self, surface, color):
+    def __init__(self, surface, color, settings):
         self.surface = surface
         self.color = color
-        self.rect_1 = (250, 100, 300, 50)
-        self.rect_2 = (250, 200, 300, 50)
-        self.rect_3 = (250, 300, 300, 50)
         self.font = pygame.font.SysFont(None, 36)
         self.color_font = (100, 150, 100)
-        self.is_active = False
+        self.btn1 = Button.Button(self.surface, 'New player')
+        self.btn2 = Button.Button(self.surface, 'Start game')
+        self.btn3 = Button.Button(self.surface, 'Quit')
+        self.btn1.is_active = True
+        self.settings = settings
 
-    def rectangles(self):
-        for event in pygame.event.get():
+    def rectangles(self, events):
+        
+        self.btn1.show_button(250, 100)
+        self.btn2.show_button(250, 200)
+        self.btn3.show_button(250, 300)
+
+        for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    self.is_active = True
-                else:
-                    self.is_active = False
-                    
+                if event.key == pygame.K_RETURN:
+                    if self.btn3.is_active:
+                        pygame.quit()
+                        sys.exit()
+                    elif self.btn2.is_active:
+                        self.settings.set_setting('game_state', 2)
+                    elif self.btn1.is_active:
+                        self.settings.set_setting('game_state', 1)
 
-        if self.is_active:
-            width =5 
-        else: width=1
+                if event.key == pygame.K_UP:
+                    if self.btn1.is_active == True:
+                        self.btn1.is_active = False
+                        self.btn3.is_active = True
 
-        rect1 = pygame.Rect(self.rect_1)
-        pygame.draw.rect(self.surface, self.color, rect1, width, border_radius=5)
-        center1 = rect1.center
-        text1 = self.font.render('New player', True, self.color_font)
-        text1_center = text1.get_rect(center=center1)
-        self.surface.blit(text1, text1_center)
+                    elif self.btn2.is_active == True:
+                        self.btn2.is_active = False
+                        self.btn1.is_active = True
 
-        rect2 = pygame.Rect(self.rect_2)
-        pygame.draw.rect(self.surface, self.color, rect2, width, border_radius=5)
-        center2 = rect2.center
-        text2 = self.font.render('Start game', True, self.color_font)
-        text2_center = text2.get_rect(center=center2)
-        self.surface.blit(text2, text2_center)
+                    elif self.btn3.is_active == True:
+                        self.btn3.is_active = False
+                        self.btn2.is_active = True
 
-        rect3 = pygame.Rect(self.rect_3)
-        pygame.draw.rect(self.surface, self.color, rect3, width, border_radius=5)
-        center3 = rect3.center
-        text3 = self.font.render('Quit', True, self.color_font)
-        text3_center = text3.get_rect(center=center3)
-        self.surface.blit(text3, text3_center)
+                if event.key == pygame.K_DOWN:
+                    if self.btn1.is_active == True:
+                        self.btn1.is_active = False
+                        self.btn2.is_active = True
+
+                    elif self.btn2.is_active == True:
+                        self.btn2.is_active = False
+                        self.btn3.is_active = True
+
+                    elif self.btn3.is_active == True:
+                        self.btn3.is_active = False
+                        self.btn1.is_active = True
+
+                

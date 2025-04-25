@@ -19,19 +19,23 @@ WIDTH = int(WINDOW_WIDTH / CELL_SIZE)
 HEIGHT = int(WINDOW_HEIGHT / CELL_SIZE)
 
 # Цвета
-BG_COLOR = (0, 0, 0)
-GRID_COLOR = (40, 100, 40)
-APPLE_COLOR = (255, 0, 0)
-APPLE_OUTER_COLOR = (155, 0, 0)
-SNAKE_COLOR = (0, 255, 0)
-SNAKE_OUTER_COLOR = (0, 155, 0)
-
-COLOR_GREEN = (0, 255, 0)
-COLOR_WHITE = (255, 255, 255)
-COLOR_BLUE = (0, 0, 255)
-COLOR_BACKGROUND = (50, 30, 30)
-COLOR_FIRSTWIND = (50, 80, 150)
-COLOR_STATUSBAR = (180, 180, 180)
+colors = {
+'BG_COLOR' : (0, 0, 0),
+'COLOR_GRID' : (40, 100, 40),
+'COLOR_APPLE' : (200, 30, 30),
+'COLOR_TAIL' : (30, 30, 30),
+'APPLE_OUTER_COLOR' : (155, 0, 0),
+'SNAKE_COLOR' : (0, 255, 0),
+'SNAKE_OUTER_COLOR' : (0, 155, 0),
+'COLOR_GREEN' : (0, 255, 0),
+'COLOR_WHITE' : (255, 255, 255),
+'COLOR_BLUE' : (0, 0, 255),
+'COLOR_BACKGROUND' : (50, 30, 30),
+'COLOR_FIRSTWIND' : (50, 80, 150),
+'COLOR_STATUSBAR' : (180, 180, 180),
+'COLOR_BORDER' : (50, 80, 150),
+'COLOR_WINDOW_FONT' : (100, 150, 100),
+}
 
 # variables
 settings = stts.Settings()
@@ -56,14 +60,14 @@ def main():
     pygame.init()
     FPS_CLOCK = pygame.time.Clock()
     DISPLAY = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    DISPLAY.fill(COLOR_BACKGROUND)
+    DISPLAY.fill(colors['COLOR_BACKGROUND'])
 
     pygame.display.set_caption('Snake')
 
-    grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
-    apple = apl.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
-    fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings, apple, start_game)
-    statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
+    grd = grid.Grid(colors, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
+    apple = apl.Apple(colors, DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
+    fstwin = w.Window(DISPLAY, colors, settings, apple, start_game)
+    statbar = bar.StatusBar(DISPLAY, colors, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
    
     run_game(grd, apple, fstwin, statbar, newplayer)
@@ -71,7 +75,7 @@ def main():
 
 def run_game(grd, apple, fstwin, statbar, newplayer):
     while True:
-        DISPLAY.fill(COLOR_BACKGROUND)
+        DISPLAY.fill(colors['COLOR_BACKGROUND'])
         game_state = settings.get_setting('game_state')
 
         events = pygame.event.get()

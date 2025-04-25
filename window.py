@@ -6,12 +6,12 @@ import settings as stts
 import info_window as infwin
 
 class Window:
-    def __init__(self, surface, color, settings, apple, start_game):
+    def __init__(self, surface, colors, settings, apple, start_game):
         
         self.surface = surface
-        self.color = color
+        self.color = colors['COLOR_FIRSTWIND']
         self.font = pygame.font.SysFont(None, 36)
-        self.color_font = (100, 150, 100)
+        self.color_font = colors['COLOR_WINDOW_FONT']
         self.info_window = infwin.info_window(self.surface, 'PLAYER NAME       SCORE')
         self.btn1 = bt.Button(self.surface, 'New player')
         self.btn2 = bt.Button(self.surface, 'Start game')

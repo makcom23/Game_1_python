@@ -3,8 +3,8 @@ import pygame
 
 
 class Grid:
-    def __init__(self, color, screen, window_width, window_height, cell_size):
-        self.color = color
+    def __init__(self, colors, screen, window_width, window_height, cell_size):
+        self.color = colors['COLOR_GRID']
         self.surface = screen
         self.window_width = window_width
         self.window_height = window_height

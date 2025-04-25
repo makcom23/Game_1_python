@@ -3,14 +3,14 @@ import pygame
 import random as rnd
 
 class Apple:
-    def __init__(self, surface, cell_size, window_width, window_height):
+    def __init__(self, colors, surface, cell_size, window_width, window_height):
         self.vizible = False
         self.surface = surface
         self.radius = 10
-        self.color_tail = (30, 30, 30)
-        self.COLOR_APPLE = (200, 30, 30)
+        self.color_tail = colors['COLOR_TAIL']
+        self.COLOR_APPLE = colors['COLOR_APPLE']
         self.cell_size = cell_size
-        self.half_cell = 10
+        self.half_cell = cell_size // 2
         self.window_width = window_width
         self.window_height = window_height
 

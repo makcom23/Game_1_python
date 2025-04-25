@@ -19,7 +19,7 @@ class First_Window:
         self.btn1.is_active = True
         self.settings = settings
 
-    def rectangles(self, events):
+    def show(self, events):
         self.info_window.show_window(250,50)
         self.btn1.show_button(250, 300)
         self.btn2.show_button(250, 400)

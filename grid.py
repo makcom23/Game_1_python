@@ -10,7 +10,7 @@ class Grid:
         self.window_height = window_height
         self.cell_size = cell_size
     
-    def grid_drawing(self):
+    def show(self):
         for y in range(0, self.window_height, self.cell_size):
             pygame.draw.line(self.surface, self.color, (0, y), (self.window_width, y), width=1)
         for x in range(0, self.window_width, self.cell_size):

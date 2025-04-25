@@ -81,6 +81,7 @@ def main():
 
 def run_game(grd, apl, fstwin, settings, statbar, newplayer):
     while True:
+        DISPLAY.fill(COLOR_BACKGROUND)
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
@@ -94,23 +95,20 @@ def run_game(grd, apl, fstwin, settings, statbar, newplayer):
 
         # grid drawing
         if game_state == 2:
-            DISPLAY.fill(COLOR_BACKGROUND)
-            grd.grid_drawing()
+            grd.show()
 
         # apple drawing
             apl.drawing_apple()
         # status bar
-            statbar.show_statusbar()
+            statbar.show()
 
         #name input
         if game_state == 1:
-            DISPLAY.fill(COLOR_BACKGROUND)
             newplayer.show(events)
 
         # first window
         if game_state == 0:
-            DISPLAY.fill(COLOR_BACKGROUND)
-            fstwin.rectangles(events)
+            fstwin.show(events)
     
 
         FPS_CLOCK.tick(FPS)

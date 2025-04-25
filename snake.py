@@ -5,7 +5,6 @@ import grid
 import apple
 import save_results
 import pygame_textinput
-import textinput as txt
 import first_window as fwnd
 import settings as stts
 import status_bar as bar
@@ -73,15 +72,14 @@ def main():
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apl = apple.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     apl.creating_new_apple()
-    text = txt.text_input(DISPLAY)
     fstwin = fwnd.First_Window(DISPLAY, COLOR_FIRSTWIND, settings)
     statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
    
-    run_game(grd, apl, text, fstwin, settings, statbar, newplayer)
+    run_game(grd, apl, fstwin, settings, statbar, newplayer)
 
 
-def run_game(grd, apl, text, fstwin, settings, statbar, newplayer):
+def run_game(grd, apl, fstwin, settings, statbar, newplayer):
     while True:
         events = pygame.event.get()
         for event in events:

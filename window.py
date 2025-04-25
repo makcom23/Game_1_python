@@ -19,7 +19,7 @@ class Window:
         self.btn1.is_active = True
         self.settings = settings
 
-    def show(self, events):
+    def show(self, events, apple, start_game):
         self.info_window.show_window(250,50)
         self.btn1.show_button(250, 300)
         self.btn2.show_button(250, 400)
@@ -32,6 +32,8 @@ class Window:
                         pygame.quit()
                         sys.exit()
                     elif self.btn2.is_active:
+                        apple.create()
+                        start_game(apple)
                         self.settings.set_setting('game_state', 2)
                     elif self.btn1.is_active:
                         self.settings.set_setting('game_state', 1)

@@ -94,7 +94,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer):
         match game_state:
             # main window
             case  0:
-                fstwin.show(events)
+                fstwin.show(events, apple, start_game)
             # new player
             case  1:
                 newplayer.show(events)
@@ -112,6 +112,12 @@ def run_game(grd, apple, fstwin, statbar, newplayer):
 def save_results(settings):
     # Save the results to a file or database
     pass
+
+def start_game(apple):
+    apple.create()
+    settings.set_setting('game_state', 2)
+    settings.set_setting('score', 0)
+
 
 def terminate():
     pygame.quit()

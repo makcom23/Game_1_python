@@ -62,7 +62,7 @@ def main():
 
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
-    fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings)
+    fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings, apple, start_game)
     statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
 
@@ -94,7 +94,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer):
         match game_state:
             # main window
             case  0:
-                fstwin.show(events, apple, start_game)
+                fstwin.show(events)
             # new player
             case  1:
                 newplayer.show(events)

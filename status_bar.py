@@ -4,16 +4,16 @@ import pygame
 
 
 class StatusBar:
-    def __init__(self, surface, color, background, settings,  position=(20, 20), fontsize=30):
+    def __init__(self, surface, colors, settings,  position=(20, 20), fontsize=30):
         self.surface = surface
-        self.COLOR_BORDER = (50, 80, 150)
-        self.color = color
+        self.COLOR_BORDER = colors['COLOR_BORDER']
+        self.color = colors['COLOR_STATUSBAR']
         self.settings = settings
-        self.background = background
+        self.background = colors['COLOR_BACKGROUND']
         self.position = position
         self.fontsize = fontsize
 
-    def show_statusbar(self):
+    def show(self):
         name = self.settings.get_setting("name")
         score = self.settings.get_setting("score")
         sound = "on" if self.settings.get_setting("sound") else "off"

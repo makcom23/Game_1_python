@@ -1,9 +1,9 @@
 import pygame
 
 class info_window:
-    def __init__(self, surface, text, width=300, height=200):
+    def __init__(self, surface, colors, text, width=300, height=200):
         self.surface = surface
-        self.COLOR_BORDER = (50, 80, 150)
+        self.COLOR_BORDER = colors['COLOR_FIRSTWIND']
         self.COLOR_TEXT = (100, 150, 100)
         self.width = width
         self.height = height

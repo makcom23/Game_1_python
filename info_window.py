@@ -1,5 +1,4 @@
 import pygame
-import random as rnd
 
 class info_window:
     def __init__(self, surface, text, width=300, height=200):

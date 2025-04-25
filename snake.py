@@ -8,6 +8,7 @@ import pygame_textinput
 import textinput as txt
 import first_window as fwnd
 import settings as stts
+import status_bar as bar
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
@@ -32,6 +33,7 @@ COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE = (0, 0, 255)
 COLOR_BACKGROUND = (50, 30, 30)
 COLOR_FIRSTWIND = (50, 80, 150)
+COLOR_STATUSBAR = (180, 180, 180)
 
 # variables
 settings = stts.settings()
@@ -72,11 +74,12 @@ def main():
     apl.creating_new_apple()
     text = txt.text_input(DISPLAY)
     fstwin = fwnd.First_Window(DISPLAY, COLOR_FIRSTWIND, settings)
+    statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, f'SERGEY SHDZ: 150 apples            sound: on            game time: 00:00:59')
    
-    run_game(grd, apl, text, fstwin, settings)
+    run_game(grd, apl, text, fstwin, settings, statbar)
 
 
-def run_game(grd, apl, text, fstwin, settings):
+def run_game(grd, apl, text, fstwin, settings, statbar):
     while True:
         events = pygame.event.get()
         for event in events:
@@ -96,6 +99,8 @@ def run_game(grd, apl, text, fstwin, settings):
 
         # apple drawing
             apl.drawing_apple()
+        # status bar
+            statbar.show_statusbar()
 
         #name input
         if game_state == 1:

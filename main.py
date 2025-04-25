@@ -65,8 +65,6 @@ def main():
     fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings, apple, start_game)
     statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
-
-    apple.create()
    
     run_game(grd, apple, fstwin, statbar, newplayer)
 

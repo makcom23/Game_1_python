@@ -85,6 +85,15 @@ def run_game(grd, apple, fstwin, settings, statbar, newplayer):
 
         events = pygame.event.get()
         for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    if game_state == 0:
+                        terminate()
+                    elif game_state == 1:
+                        settings.set_setting('game_state', 0)
+                    elif game_state == 2:
+                        settings.set_setting('game_state', 0)
+
             if event.type == pygame.QUIT:
                 terminate()
 

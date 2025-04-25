@@ -49,12 +49,6 @@ FPS = 15
 pygame.init() # initialization of pygame
 
 
-class Cell:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-
 def main(): 
     global FPS_CLOCK
     global DISPLAY

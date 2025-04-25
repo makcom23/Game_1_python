@@ -1,7 +1,7 @@
 import pygame
 import sys
 import grid
-import apple
+import apple as apl
 import save_results
 import window as w
 import settings as stts
@@ -68,15 +68,17 @@ def main():
 
     #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
-    apl = apple.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
+    apple = apl.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings)
     statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
+
+    apple.create()
    
-    run_game(grd, apl, fstwin, settings, statbar, newplayer)
+    run_game(grd, apple, fstwin, settings, statbar, newplayer)
 
 
-def run_game(grd, apl, fstwin, settings, statbar, newplayer):
+def run_game(grd, apple, fstwin, settings, statbar, newplayer):
     while True:
         DISPLAY.fill(COLOR_BACKGROUND)
         game_state = settings.get_setting('game_state')
@@ -96,7 +98,7 @@ def run_game(grd, apl, fstwin, settings, statbar, newplayer):
             # game in progress
             case 2:
                 grd.show()
-                apl.drawing_apple()
+                apple.show()
                 statbar.show()
 
 

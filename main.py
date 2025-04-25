@@ -60,7 +60,6 @@ def main():
 
     pygame.display.set_caption('Snake')
 
-    #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings)
@@ -69,10 +68,10 @@ def main():
 
     apple.create()
    
-    run_game(grd, apple, fstwin, settings, statbar, newplayer)
+    run_game(grd, apple, fstwin, statbar, newplayer)
 
 
-def run_game(grd, apple, fstwin, settings, statbar, newplayer):
+def run_game(grd, apple, fstwin, statbar, newplayer):
     while True:
         DISPLAY.fill(COLOR_BACKGROUND)
         game_state = settings.get_setting('game_state')

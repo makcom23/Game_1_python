@@ -12,7 +12,7 @@ class Window:
         self.color = colors['COLOR_FIRSTWIND']
         self.font = pygame.font.SysFont(None, 36)
         self.color_font = colors['COLOR_WINDOW_FONT']
-        self.info_window = infwin.info_window(self.surface, 'PLAYER NAME       SCORE')
+        self.info_window = infwin.info_window(self.surface, colors, 'PLAYER NAME       SCORE')
         self.btn1 = bt.Button(self.surface, 'New player')
         self.btn2 = bt.Button(self.surface, 'Start game')
         self.btn3 = bt.Button(self.surface, 'Quit')

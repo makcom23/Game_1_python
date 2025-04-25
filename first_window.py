@@ -1,6 +1,6 @@
 # class first window
 import pygame
-import Button
+import button as bt
 import sys
 import settings as stts
 import info_window as infwin
@@ -13,9 +13,9 @@ class First_Window:
         self.font = pygame.font.SysFont(None, 36)
         self.color_font = (100, 150, 100)
         self.info_window = infwin.info_window(self.surface, 'PLAYER NAME       SCORE')
-        self.btn1 = Button.Button(self.surface, 'New player')
-        self.btn2 = Button.Button(self.surface, 'Start game')
-        self.btn3 = Button.Button(self.surface, 'Quit')
+        self.btn1 = bt.Button(self.surface, 'New player')
+        self.btn2 = bt.Button(self.surface, 'Start game')
+        self.btn3 = bt.Button(self.surface, 'Quit')
         self.btn1.is_active = True
         self.settings = settings
 

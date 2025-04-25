@@ -1,5 +1,5 @@
 
-class settings:
+class Settings:
     def __init__(self):
         self.settings = {
             "game_state": 0,

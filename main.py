@@ -92,6 +92,7 @@ def run_game(grd, apple, fstwin, settings, statbar, newplayer):
                     elif game_state == 1:
                         settings.set_setting('game_state', 0)
                     elif game_state == 2:
+                        save_results(settings)
                         settings.set_setting('game_state', 0)
 
             if event.type == pygame.QUIT:
@@ -115,6 +116,9 @@ def run_game(grd, apple, fstwin, settings, statbar, newplayer):
         pygame.display.flip()
         
 
+def save_results(settings):
+    # Save the results to a file or database
+    pass
 
 def terminate():
     pygame.quit()

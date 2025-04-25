@@ -86,20 +86,19 @@ def run_game(grd, apl, fstwin, settings, statbar, newplayer):
             if event.type == pygame.QUIT:
                 terminate()
 
-        # game in progress
-        if game_state == 2:
-            grd.show()
-            apl.drawing_apple()
-            statbar.show()
+        match game_state:
+            # main window
+            case  0:
+                fstwin.show(events)
+            # new player
+            case  1:
+                newplayer.show(events)
+            # game in progress
+            case 2:
+                grd.show()
+                apl.drawing_apple()
+                statbar.show()
 
-        # new player
-        if game_state == 1:
-            newplayer.show(events)
-
-        # main window
-        if game_state == 0:
-            fstwin.show(events)
-    
 
         FPS_CLOCK.tick(FPS)
         pygame.display.flip()

@@ -82,31 +82,24 @@ def main():
 def run_game(grd, apl, fstwin, settings, statbar, newplayer):
     while True:
         DISPLAY.fill(COLOR_BACKGROUND)
+        game_state = settings.get_setting('game_state')
+
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
                 terminate()
 
-        keys = pygame.key.get_pressed()
-        game_state = settings.get_setting('game_state')
-        
-        # input name
-        #save_res.save_name()
-
-        # grid drawing
+        # game in progress
         if game_state == 2:
             grd.show()
-
-        # apple drawing
             apl.drawing_apple()
-        # status bar
             statbar.show()
 
-        #name input
+        # new player
         if game_state == 1:
             newplayer.show(events)
 
-        # first window
+        # main window
         if game_state == 0:
             fstwin.show(events)
     

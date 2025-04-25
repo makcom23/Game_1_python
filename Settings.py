@@ -2,7 +2,10 @@
 class settings:
     def __init__(self):
         self.settings = {
-            "game_state": 0
+            "game_state": 0,
+            "name": 'None',
+            "score": 0,
+            "sound": True
         }
 
     def get_setting(self, key):

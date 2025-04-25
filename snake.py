@@ -68,7 +68,7 @@ def main():
 
     #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
-    apl = apple.Apple(DISPLAY)
+    apl = apple.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     apl.creating_new_apple()
     text = txt.text_input(DISPLAY)
     fstwin = fwnd.First_Window(DISPLAY, COLOR_FIRSTWIND, settings)
@@ -91,7 +91,9 @@ def run_game(grd, apl, text, fstwin, settings):
 
         # grid drawing
         if game_state == 2:
+            DISPLAY.fill(COLOR_BACKGROUND)
             grd.grid_drawing()
+
         # apple drawing
             apl.drawing_apple()
 
@@ -113,5 +115,4 @@ def terminate():
     sys.exit()
 
 
-if __name__ == '__main__':
-    main()
+main()

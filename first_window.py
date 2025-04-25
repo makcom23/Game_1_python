@@ -3,13 +3,16 @@ import pygame
 import Button
 import sys
 import settings as stts
+import info_window as infwin
 
 class First_Window:
     def __init__(self, surface, color, settings):
+        
         self.surface = surface
         self.color = color
         self.font = pygame.font.SysFont(None, 36)
         self.color_font = (100, 150, 100)
+        self.info_window = infwin.info_window(self.surface, 'PLAYER NAME       SCORE')
         self.btn1 = Button.Button(self.surface, 'New player')
         self.btn2 = Button.Button(self.surface, 'Start game')
         self.btn3 = Button.Button(self.surface, 'Quit')
@@ -17,10 +20,10 @@ class First_Window:
         self.settings = settings
 
     def rectangles(self, events):
-        
-        self.btn1.show_button(250, 100)
-        self.btn2.show_button(250, 200)
-        self.btn3.show_button(250, 300)
+        self.info_window.show_window(250,50)
+        self.btn1.show_button(250, 300)
+        self.btn2.show_button(250, 400)
+        self.btn3.show_button(250, 500)
 
         for event in events:
             if event.type == pygame.KEYDOWN:

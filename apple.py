@@ -17,7 +17,7 @@ class Apple:
             pygame.draw.line(self.surface, self.color_tail, self.pos, tail_end, width=3)
 
     def creating_new_apple(self):
-        self.x = rnd.randint(10,790)
-        self.y = rnd.randint(10, 590)
+        self.x = rnd.randint(1, 39) * 20 + 10
+        self.y = rnd.randint(1, 29) * 20 + 10
         self.pos =(self.x, self.y)
         self.vizible = True

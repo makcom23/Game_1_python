@@ -1,12 +1,9 @@
 import pygame
-import random
 import sys
 import grid
 import apple
 import save_results
-import pygame_textinput
-import textinput as txt
-import first_window as fwnd
+import window as w
 import settings as stts
 import status_bar as bar
 import new_player as np
@@ -72,7 +69,7 @@ def main():
     #player_rect         = DISPLAY.get_rect(center=(WIDTH/2, HEIGHT/2))
     grd = grid.Grid(GRID_COLOR, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apl = apple.Apple(DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
-    fstwin = fwnd.First_Window(DISPLAY, COLOR_FIRSTWIND, settings)
+    fstwin = w.Window(DISPLAY, COLOR_FIRSTWIND, settings)
     statbar = bar.StatusBar(DISPLAY, COLOR_STATUSBAR, COLOR_BACKGROUND, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
    

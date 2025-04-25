@@ -5,7 +5,7 @@ import sys
 import settings as stts
 import info_window as infwin
 
-class First_Window:
+class Window:
     def __init__(self, surface, color, settings):
         
         self.surface = surface

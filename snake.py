@@ -2,7 +2,7 @@ import pygame
 import random as rnd
 
 class Snake:
-    def __init__(self, surface, colors, cell_size, window_width, window_height):
+    def __init__(self, surface, colors, cell_size, window_width, window_height, settings, apple):
         self.vizible = False
         self.surface = surface
         self.radius = 10
@@ -13,8 +13,10 @@ class Snake:
         self.half_cell = cell_size // 2
         self.window_width = window_width
         self.window_height = window_height
+        self.settings = settings
+        self.apl = apple
 
-    def snake_head(self):
+    def show(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's head
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x-3, self.y-3), self.eye, width=0) # snake's left eye
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x+3, self.y-3), self.eye, width=0) # snake's right eye
@@ -23,12 +25,47 @@ class Snake:
     def snake_tail_add(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's tail
         
-    def snake_head_apears(self):
-        self.x = rnd.randint(1, (self.window_width - 20)//self.cell_size) * self.cell_size + self.half_cell
-        self.y = rnd.randint(1, (self.window_height - 20)//self.cell_size) * self.cell_size + self.half_cell
+    def create(self, x, y):
+        self.x = x
+        self.y = y
         self.pos =(self.x, self.y)
         self.vizible = True
 
+    def check_borders(self):
+        if self.y <= 40:
+            self.y = self.window_height-10
+        elif self.y >= self.window_height:
+            self.y = 50
+        elif self.x <= 0:
+            self.x = self.window_width-10
+        elif self.x >= self.window_width:
+            self.x = 10
 
     def snake_tail_pos(self):
         pass
+
+    def move(self):
+
+        direction = self.settings.get_setting('direction')
+
+        match direction:
+            case 'up': 
+                self.y = self.y - self.cell_size
+            case 'down':
+                self.y = self.y + self.cell_size
+            case 'left': 
+                self.x = self.x - self.cell_size
+            case 'right':
+                self.x = self.x + self.cell_size
+        self.check_borders()
+        self.pos = (self.x, self.y)
+
+    def check(self):
+    
+        print(f'apple_x= {self.apl.x}')
+        print(f'snake_x = {self.x} snake_y = {self.y}')
+        if self.x == self.apl.x and self.y == self.apl.y:
+            self.apl.create()
+            score = self.settings.get_setting('score')
+            score += 1
+            self.settings.set_setting('score', score)

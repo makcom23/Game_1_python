@@ -5,7 +5,8 @@ class Settings:
             "game_state": 0,
             "name": 'None',
             "score": 0,
-            "sound": True
+            "sound": True,
+            "direction": "up",
         }
 
     def get_setting(self, key):

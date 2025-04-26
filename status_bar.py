@@ -4,7 +4,7 @@ import pygame
 
 
 class StatusBar:
-    def __init__(self, surface, colors, settings,  position=(20, 20), fontsize=30):
+    def __init__(self, surface, colors, settings,  position=(20, 10), fontsize=30):
         self.surface = surface
         self.COLOR_BORDER = colors['COLOR_BORDER']
         self.color = colors['COLOR_STATUSBAR']

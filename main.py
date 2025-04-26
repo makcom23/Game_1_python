@@ -16,7 +16,8 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 # play zone 
-#PLAY_WIDTH = 
+PLAY_WIDTH = 800
+PLAY_HEIGHT = 500
 
 CELL_SIZE = 20
 
@@ -57,7 +58,7 @@ RIGHT = 'right'
 HEAD = 0    
 
 # game settings
-FPS = 15
+FPS = 3
 pygame.init() # initialization of pygame
 
 
@@ -74,10 +75,11 @@ def main():
 
     grd = grid.Grid(colors, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(colors, DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
-    snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
+    snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT, settings, apple)
     fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
     statbar = bar.StatusBar(DISPLAY, colors, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
+    
     # move = msk.SnakeMove()
 
 
@@ -114,15 +116,30 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake):
                 newplayer.show(events)
             # game in progress
             case 2:
+                check_direction(events)
                 grd.show()
                 apple.show()
                 statbar.show()
-                snake.snake_head()
-
+                snake.move()
+                snake.show()
+                snake.check()
 
         FPS_CLOCK.tick(FPS)
         pygame.display.flip()
-        
+
+def check_direction(events): # привязка кнопок
+    for event in events:
+        if event.type == pygame.KEYDOWN:
+            match event.key: 
+                case pygame.K_UP:
+                    settings.set_setting("direction", "up")
+                case pygame.K_DOWN:
+                    settings.set_setting("direction", "down")
+                case pygame.K_LEFT:
+                    settings.set_setting("direction", "left")
+                case pygame.K_RIGHT:
+                    settings.set_setting("direction", "right")
+
 
 def save_results(settings):
     # Save the results to a file or database
@@ -130,9 +147,11 @@ def save_results(settings):
 
 def start_game(apple, snake):
     apple.create()
-    snake.snake_head_apears()
+    snake.create(210, 510)
+    settings.set_setting('direction', 'up')
     settings.set_setting('game_state', 2)
     settings.set_setting('score', 0)
+
 
 
 def terminate():

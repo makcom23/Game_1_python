@@ -13,6 +13,9 @@ class Apple:
         self.half_cell = cell_size // 2
         self.window_width = window_width
         self.window_height = window_height
+        self.x = 0
+        self.y = 0
+        self.pos =()
 
     def show(self):
         if self.vizible:
@@ -22,6 +25,7 @@ class Apple:
 
     def create(self):
         self.x = rnd.randint(1, (self.window_width - 20)//self.cell_size) * self.cell_size + self.half_cell
-        self.y = rnd.randint(1, (self.window_height - 20)//self.cell_size) * self.cell_size + self.half_cell
-        self.pos =(self.x, self.y)
+        self.y = rnd.randint(2, (self.window_height - 20)//self.cell_size) * self.cell_size + self.half_cell
+        self.pos = (self.x, self.y)
+        #print (f'apple pos = {self.pos}')
         self.vizible = True

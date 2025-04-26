@@ -23,11 +23,12 @@ class Snake:
     def snake_tail_add(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's tail
         
-    def snake_head_pos(self):
+    def snake_head_apears(self):
         self.x = rnd.randint(1, (self.window_width - 20)//self.cell_size) * self.cell_size + self.half_cell
         self.y = rnd.randint(1, (self.window_height - 20)//self.cell_size) * self.cell_size + self.half_cell
         self.pos =(self.x, self.y)
         self.vizible = True
+
 
     def snake_tail_pos(self):
         pass

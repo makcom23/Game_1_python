@@ -8,6 +8,7 @@ import settings as stts
 import status_bar as bar
 import new_player as np
 import snake as snk
+import move_snake as msk
 
 
 # Размеры окна в пикселях
@@ -77,6 +78,8 @@ def main():
     fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
     statbar = bar.StatusBar(DISPLAY, colors, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
+    # move = msk.SnakeMove()
+
 
    
     run_game(grd, apple, fstwin, statbar, newplayer, snake)
@@ -127,7 +130,7 @@ def save_results(settings):
 
 def start_game(apple, snake):
     apple.create()
-    snake.snake_head_pos()
+    snake.snake_head_apears()
     settings.set_setting('game_state', 2)
     settings.set_setting('score', 0)
 

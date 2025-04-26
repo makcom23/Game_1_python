@@ -5,8 +5,9 @@ import sys
 import settings as stts
 import info_window as infwin
 
+
 class Window:
-    def __init__(self, surface, colors, settings, apple, start_game):
+    def __init__(self, surface, colors, settings, apple, start_game, snake):
         
         self.surface = surface
         self.color = colors['COLOR_FIRSTWIND']
@@ -19,6 +20,7 @@ class Window:
         self.btn1.is_active = True
         self.settings = settings
         self.apple = apple
+        self.snake=snake
         self.start_game = start_game
 
     def show(self, events):
@@ -34,8 +36,7 @@ class Window:
                         pygame.quit()
                         sys.exit()
                     elif self.btn2.is_active:
-                        self.apple.create()
-                        self.start_game(self.apple)
+                        self.start_game(self.apple, self.snake)
                         self.settings.set_setting('game_state', 2)
                     elif self.btn1.is_active:
                         self.settings.set_setting('game_state', 1)

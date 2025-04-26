@@ -7,10 +7,15 @@ import window as w
 import settings as stts
 import status_bar as bar
 import new_player as np
+import snake as snk
+
 
 # Размеры окна в пикселях
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
+
+# play zone 
+#PLAY_WIDTH = 
 
 CELL_SIZE = 20
 
@@ -35,6 +40,8 @@ colors = {
 'COLOR_STATUSBAR' : (180, 180, 180),
 'COLOR_BORDER' : (50, 80, 150),
 'COLOR_WINDOW_FONT' : (100, 150, 100),
+'COLOR_SNAKE': (50, 200, 50),
+'COLOR_EYE': (10, 10, 10),
 }
 
 # variables
@@ -66,14 +73,16 @@ def main():
 
     grd = grid.Grid(colors, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(colors, DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
-    fstwin = w.Window(DISPLAY, colors, settings, apple, start_game)
+    snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
+    fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
     statbar = bar.StatusBar(DISPLAY, colors, settings)
     newplayer = np.NewPlayer(DISPLAY, settings)
+
    
-    run_game(grd, apple, fstwin, statbar, newplayer)
+    run_game(grd, apple, fstwin, statbar, newplayer, snake)
 
 
-def run_game(grd, apple, fstwin, statbar, newplayer):
+def run_game(grd, apple, fstwin, statbar, newplayer, snake):
     while True:
         DISPLAY.fill(colors['COLOR_BACKGROUND'])
         game_state = settings.get_setting('game_state')
@@ -105,6 +114,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer):
                 grd.show()
                 apple.show()
                 statbar.show()
+                snake.snake_head()
 
 
         FPS_CLOCK.tick(FPS)
@@ -115,8 +125,9 @@ def save_results(settings):
     # Save the results to a file or database
     pass
 
-def start_game(apple):
+def start_game(apple, snake):
     apple.create()
+    snake.snake_head_pos()
     settings.set_setting('game_state', 2)
     settings.set_setting('score', 0)
 

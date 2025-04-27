@@ -16,16 +16,22 @@ class Snake:
         self.settings = settings
         self.apl = apple
         self.crunch_sound = pygame.mixer.Sound ( "apple_crunch.wav" )
+        self.tail_count = 0
+        self.tail_pos = []
 
     def show(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's head
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x-3, self.y-3), self.eye, width=0) # snake's left eye
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x+3, self.y-3), self.eye, width=0) # snake's right eye
         pygame.draw.line(self.surface, self.COLOR_EYE, (self.x-3, self.y+6), (self.x+3, self.y+6), width=2) # snake's mouth
+        if self.tail_count:
+            self.snake_tail_add()
 
-    def snake_tail_add(self):
-        pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's tail
+    def tail_show(self):
+        for pos in self.tail_pos[1:]:
+            pygame.draw.circle(self.surface, self.COLOR_SNAKE, pos, self.radius, width=0) # snake's tail
         
+    
     def create(self, x, y):
         self.x = x
         self.y = y
@@ -42,9 +48,6 @@ class Snake:
         elif self.x >= self.window_width:
             self.x = 10
 
-    def snake_tail_pos(self):
-        pass
-
     def move(self):
 
         direction = self.settings.get_setting('direction')
@@ -60,14 +63,20 @@ class Snake:
                 self.x = self.x + self.cell_size
         self.check_borders()
         self.pos = (self.x, self.y)
+        
+        self.prev_head_pos = (self.x, self.y) # нужно список кортежей tail_pos как-то ограничить головой prev_head_pos и обрезать хвосты
+        self.tail_pos.append(self.pos)
+        print(self.tail_pos)
 
     def check(self):
     
-        print(f'apple_x= {self.apl.x}')
-        print(f'snake_x = {self.x} snake_y = {self.y}')
         if self.x == self.apl.x and self.y == self.apl.y:          
             self.apl.create()           
             score = self.settings.get_setting('score')
             score += 1
             self.settings.set_setting('score', score)
             pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch
+    
+    def add_tail(self):
+        if self.x == self.apl.x and self.y == self.apl.y:
+            self.tail_count +=1

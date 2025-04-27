@@ -8,9 +8,9 @@ class GameTime:
         self.start_ticks = pygame.time.get_ticks()
 
     def start(self):
-        self.count = int((pygame.time.get_ticks() - self.start_ticks)/1000)
-        self.minutes = int(self.count //60)
-        self.seconds = self.count % 60
+        count = int((pygame.time.get_ticks() - self.start_ticks)/1000)
+        self.minutes = int(count //60)
+        self.seconds = count % 60
 
     def get_time(self):
         return (f'{self.minutes} min : {self.seconds} sec')

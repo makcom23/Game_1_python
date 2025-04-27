@@ -120,6 +120,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                 snake.move()
                 snake.show()
                 snake.check()
+                snake.tail_show()
                 gametime.start()
 
         FPS_CLOCK.tick(FPS)

@@ -22,6 +22,7 @@ class Window:
         self.apple = apple
         self.snake=snake
         self.start_game = start_game
+        self.start_sound = pygame.mixer.Sound ("game_start.wav")
 
     def show(self, events):
         self.info_window.show_window(250,50)
@@ -38,6 +39,7 @@ class Window:
                     elif self.btn2.is_active:
                         self.start_game(self.apple, self.snake)
                         self.settings.set_setting('game_state', 2)
+                        pygame.mixer.Sound.play(self.start_sound) # sound start game
                     elif self.btn1.is_active:
                         self.settings.set_setting('game_state', 1)
 

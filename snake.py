@@ -70,4 +70,4 @@ class Snake:
             score = self.settings.get_setting('score')
             score += 1
             self.settings.set_setting('score', score)
-            pygame.mixer.Sound.play(self.crunch_sound)
+            pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch

@@ -8,6 +8,7 @@ import settings as stts
 import status_bar as bar
 import new_player as np
 import snake as snk
+import game_time
 
 
 # Размеры окна в пикселях
@@ -72,21 +73,18 @@ def main():
 
     pygame.display.set_caption('Snake')
 
+    gametime = game_time.GameTime()
     grd = grid.Grid(colors, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(colors, DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT, settings, apple)
     fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
-    statbar = bar.StatusBar(DISPLAY, colors, settings)
+    statbar = bar.StatusBar(DISPLAY, colors, settings, gametime)
     newplayer = np.NewPlayer(DISPLAY, settings)
-    
-    # move = msk.SnakeMove()
-
-
    
-    run_game(grd, apple, fstwin, statbar, newplayer, snake)
+    run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime)
 
 
-def run_game(grd, apple, fstwin, statbar, newplayer, snake):
+def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
     while True:
         DISPLAY.fill(colors['COLOR_BACKGROUND'])
         game_state = settings.get_setting('game_state')
@@ -122,6 +120,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake):
                 snake.move()
                 snake.show()
                 snake.check()
+                gametime.start()
 
         FPS_CLOCK.tick(FPS)
         pygame.display.flip()

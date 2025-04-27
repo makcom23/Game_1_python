@@ -17,3 +17,4 @@ class Settings:
             self.settings[key] = value
         else:
             raise KeyError(f"Setting '{key}' does not exist.")
+    

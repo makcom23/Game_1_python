@@ -15,6 +15,7 @@ class Snake:
         self.window_height = window_height
         self.settings = settings
         self.apl = apple
+        self.crunch_sound = pygame.mixer.Sound ( "apple_crunch.wav" )
 
     def show(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's head
@@ -64,8 +65,9 @@ class Snake:
     
         print(f'apple_x= {self.apl.x}')
         print(f'snake_x = {self.x} snake_y = {self.y}')
-        if self.x == self.apl.x and self.y == self.apl.y:
-            self.apl.create()
+        if self.x == self.apl.x and self.y == self.apl.y:          
+            self.apl.create()           
             score = self.settings.get_setting('score')
             score += 1
             self.settings.set_setting('score', score)
+            pygame.mixer.Sound.play(self.crunch_sound)

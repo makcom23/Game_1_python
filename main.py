@@ -8,7 +8,6 @@ import settings as stts
 import status_bar as bar
 import new_player as np
 import snake as snk
-import move_snake as msk
 
 
 # Размеры окна в пикселях

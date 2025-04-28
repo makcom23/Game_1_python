@@ -18,6 +18,8 @@ class Snake:
         self.settings = settings
         self.apl = apple
         self.crunch_sound = pygame.mixer.Sound ( "apple_crunch.wav" )
+        self.lose_sound = pygame.mixer.Sound ( "lose.wav" )
+        self.game_over_sound = pygame.mixer.Sound ( "game_over.wav" )
         self.tail_count = 0
         self.tail_pos = []
         self.gameover = False
@@ -82,6 +84,9 @@ class Snake:
         
     def game_over(self):
         if self.pos in self.tail_pos[1:]:
+            pygame.mixer.Sound.play(self.lose_sound) # sound lose
+            pygame.time.delay(2000)
+            pygame.mixer.Sound.play(self.game_over_sound) # sound game over
             text = pygame.font.SysFont('Orbitron', 50)
             img = text.render('GAME OVER', True, self.COLOR_STATUSBAR)
             self.surface.blit(img, (210, 250))

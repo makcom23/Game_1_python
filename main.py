@@ -121,7 +121,9 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                 snake.show()
                 snake.check()
                 snake.tail_show()
+                snake.game_over()
                 gametime.start()
+
 
         FPS_CLOCK.tick(FPS)
         pygame.display.flip()

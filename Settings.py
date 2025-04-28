@@ -7,6 +7,7 @@ class Settings:
             "score": 0,
             "sound": True,
             "direction": "up",
+            "reverse": "on"
         }
 
     def get_setting(self, key):

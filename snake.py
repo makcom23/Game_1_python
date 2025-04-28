@@ -1,4 +1,5 @@
 import pygame
+import sys
 import random as rnd
 
 class Snake:
@@ -9,6 +10,7 @@ class Snake:
         self.eye = 2
         self.COLOR_EYE = colors['COLOR_EYE']
         self.COLOR_SNAKE = colors['COLOR_SNAKE']
+        self.COLOR_STATUSBAR = colors['COLOR_STATUSBAR']
         self.cell_size = cell_size
         self.half_cell = cell_size // 2
         self.window_width = window_width
@@ -18,6 +20,7 @@ class Snake:
         self.crunch_sound = pygame.mixer.Sound ( "apple_crunch.wav" )
         self.tail_count = 0
         self.tail_pos = []
+        self.gameover = False
 
     def show(self):
         pygame.draw.circle(self.surface, self.COLOR_SNAKE, self.pos, self.radius, width=0) # snake's head
@@ -63,9 +66,9 @@ class Snake:
         self.pos = (self.x, self.y)
         
         self.prev_head_pos = (self.x, self.y) # нужно список кортежей tail_pos как-то ограничить головой prev_head_pos и обрезать хвосты
-        self.tail_pos.insert(0, self.prev_head_pos)
+        self.tail_pos.insert(0, self.prev_head_pos) 
         del self.tail_pos[self.tail_count+1:]
-        print(self.tail_pos)
+        #print(self.tail_pos)            
 
     def check(self):
     
@@ -76,3 +79,13 @@ class Snake:
             self.settings.set_setting('score', score)
             pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch
             self.tail_count +=1
+        
+    def game_over(self):
+        if self.pos in self.tail_pos[1:]:
+            text = pygame.font.SysFont('Orbitron', 50)
+            img = text.render('GAME OVER', True, self.COLOR_STATUSBAR)
+            self.surface.blit(img, (210, 250))
+            pygame.display.update() 
+            pygame.time.delay(5000)
+            self.settings.set_setting('game_state', 0)
+           

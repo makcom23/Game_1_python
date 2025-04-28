@@ -24,9 +24,7 @@ class Snake:
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x-3, self.y-3), self.eye, width=0) # snake's left eye
         pygame.draw.circle(self.surface, self.COLOR_EYE, (self.x+3, self.y-3), self.eye, width=0) # snake's right eye
         pygame.draw.line(self.surface, self.COLOR_EYE, (self.x-3, self.y+6), (self.x+3, self.y+6), width=2) # snake's mouth
-        if self.tail_count:
-            self.snake_tail_add()
-
+    
     def tail_show(self):
         for pos in self.tail_pos[1:]:
             pygame.draw.circle(self.surface, self.COLOR_SNAKE, pos, self.radius, width=0) # snake's tail
@@ -65,7 +63,8 @@ class Snake:
         self.pos = (self.x, self.y)
         
         self.prev_head_pos = (self.x, self.y) # нужно список кортежей tail_pos как-то ограничить головой prev_head_pos и обрезать хвосты
-        self.tail_pos.append(self.pos)
+        self.tail_pos.insert(0, self.prev_head_pos)
+        del self.tail_pos[self.tail_count+1:]
         print(self.tail_pos)
 
     def check(self):
@@ -76,7 +75,4 @@ class Snake:
             score += 1
             self.settings.set_setting('score', score)
             pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch
-    
-    def add_tail(self):
-        if self.x == self.apl.x and self.y == self.apl.y:
             self.tail_count +=1

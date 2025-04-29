@@ -2,12 +2,12 @@ import pygame
 import sys
 import grid
 import apple as apl
-import save_results
+import game_results
 import window as w
 import settings as stts
 import status_bar as bar
 import new_player as np
-import snake as snk
+import snake_1 as snk
 import game_time
 
 
@@ -98,7 +98,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                     elif game_state == 1:
                         settings.set_setting('game_state', 0)
                     elif game_state == 2:
-                        save_results(settings)
+                        game_results(settings)
                         settings.set_setting('game_state', 0)
 
             if event.type == pygame.QUIT:
@@ -142,7 +142,7 @@ def check_direction(events): # привязка кнопок
                     settings.set_setting("direction", "right")
 
 
-def save_results(settings):
+def game_results(settings):
     # Save the results to a file or database
     pass
 

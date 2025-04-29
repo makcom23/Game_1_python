@@ -1,10 +1,9 @@
-# save results
+# game results
 import json
 import os
 
 class save_res:
     def save_name(name):
-        name = input('Input your name')
 
         if os.path.exists('results.json'): # checking exist result.json
             with open('results.json') as res:

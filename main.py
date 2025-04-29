@@ -79,7 +79,7 @@ def main():
     snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT, settings, apple)
     fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
     statbar = bar.StatusBar(DISPLAY, colors, settings, gametime)
-    newplayer = np.NewPlayer(DISPLAY, settings)
+    newplayer = np.NewPlayer(DISPLAY, settings, colors)
    
     run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime)
 

@@ -93,8 +93,11 @@ class AbstractSnake(ABC):
 
         
     def apple_was_eaten(self):
-        if self.x == self.apl.x and self.y == self.apl.y:          
-            self.apl.create()           
+        if self.is_intersect_apple():
+            while True:
+                self.apl.create()
+                if self.is_intersect_apple() == False:
+                    break
             score = self.settings.get_setting('score')
             score +=1
             self.settings.set_setting('score', score)
@@ -102,6 +105,8 @@ class AbstractSnake(ABC):
             return True
         else:
             return False
+        
+
 
     @abstractmethod
     def move(self):
@@ -113,6 +118,10 @@ class AbstractSnake(ABC):
 
     @abstractmethod
     def game_over(self):
+        pass
+
+    @abstractmethod
+    def is_intersect_apple(self):
         pass
 
     def tail_show(self):

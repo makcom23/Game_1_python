@@ -60,3 +60,11 @@ class Snake(AbstractSnake):
             self.tail = Snake(self.surface, self.colors, self.cell_size, self.window_width, self.window_height, self.settings, self.apl)
             self.tail.head = self
             self.tail.tail = tail
+
+    def is_intersect_apple(self):
+        if self.x == self.apl.x and self.y == self.apl.y:
+            return True
+        else:
+            if self.tail != None:
+                return self.tail.is_intersect_apple()
+            return False

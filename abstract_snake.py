@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import pygame
+import json
 
 class AbstractSnake(ABC):
 
@@ -73,7 +74,23 @@ class AbstractSnake(ABC):
         self.surface.blit(img, (210, 250))
         pygame.display.update() 
         pygame.time.delay(5000)
+        
+        # save game result
+        player_name = self.settings.get_setting('name')
+        score = self.settings.get_setting('score')
+        with open('results.json') as res:
+            results = json.load(res)
+        results[player_name] = score
+    
+        # sorting results.json
+        sorted_results = dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
+    
+        with open('results.json', 'w', encoding='utf-8') as res:
+            json.dump(sorted_results, res, indent=4)
+        
+        # exit
         self.settings.set_setting('game_state', 0)
+
         
     def apple_was_eaten(self):
         if self.x == self.apl.x and self.y == self.apl.y:          

@@ -1,8 +1,9 @@
 import pygame
 import sys
 import random as rnd
+from abstract_snake import AbstractSnake
 
-class Snake:
+class Snake(AbstractSnake):
     def __init__(self, surface, colors, cell_size, window_width, window_height, settings, apple):
         self.vizible = False
         self.surface = surface

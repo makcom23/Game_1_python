@@ -7,7 +7,7 @@ import window as w
 import settings as stts
 import status_bar as bar
 import new_player as np
-import snake_2 as snk
+import snake_1 as snk
 import game_time
 
 

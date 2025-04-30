@@ -100,6 +100,11 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                     elif game_state == 2:
                         game_results(settings)
                         settings.set_setting('game_state', 0)
+                if event.key == pygame.K_m:
+                    if settings.get_setting('sound'):
+                        settings.set_setting('sound', False)
+                    else:
+                        settings.set_setting('sound', True)
 
             if event.type == pygame.QUIT:
                 terminate()

@@ -68,9 +68,11 @@ class AbstractSnake(ABC):
             self.x = 10
 
     def finish(self):
-        pygame.mixer.Sound.play(self.lose_sound) # sound lose
+        if self.settings.get_setting('sound'): 
+            pygame.mixer.Sound.play(self.lose_sound) # sound lose
         pygame.time.delay(2000)
-        pygame.mixer.Sound.play(self.game_over_sound) # sound game over
+        if self.settings.get_setting('sound'):
+            pygame.mixer.Sound.play(self.game_over_sound) # sound game over
         text = pygame.font.SysFont('Orbitron', 50)
         img = text.render('GAME OVER', True, self.COLOR_STATUSBAR)
         self.surface.blit(img, (210, 250))
@@ -107,7 +109,8 @@ class AbstractSnake(ABC):
             score = self.settings.get_setting('score')
             score +=1
             self.settings.set_setting('score', score)
-            pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch
+            if self.settings.get_setting('sound'): 
+                pygame.mixer.Sound.play(self.crunch_sound) # sound apple crunch
             return True
         else:
             return False

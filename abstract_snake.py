@@ -53,6 +53,8 @@ class AbstractSnake(ABC):
         self.x = x
         self.y = y
         self.pos =(self.x, self.y)
+        self.tail_pos = []  # обнуляем хвост
+        self.tail_count = 0  # обнуляем длину хвоста
         self.vizible = True
 
     def check_borders(self):
@@ -75,21 +77,25 @@ class AbstractSnake(ABC):
         pygame.display.update() 
         pygame.time.delay(5000)
         
-        # save game result
+        # save game result #####################
         player_name = self.settings.get_setting('name')
         score = self.settings.get_setting('score')
         with open('results.json') as res:
             results = json.load(res)
-        results[player_name] = score
+        if score > results[player_name]: # check player result with exist results
+            results[player_name] = score
     
-        # sorting results.json
-        sorted_results = dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
-    
-        with open('results.json', 'w', encoding='utf-8') as res:
-            json.dump(sorted_results, res, indent=4)
+            # sorting results.json
+            sorted_results = dict(sorted(results.items(), key=lambda item: item[1], reverse=True)) 
         
-        # exit
-        self.settings.set_setting('game_state', 0)
+            with open('results.json', 'w', encoding='utf-8') as res:
+                json.dump(sorted_results, res, indent=4)
+            #####################
+            
+            self.settings.set_setting('game_state', 0)
+        else:
+            # exit
+            self.settings.set_setting('game_state', 0)
 
         
     def apple_was_eaten(self):

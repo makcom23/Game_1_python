@@ -3,8 +3,8 @@ import pygame
 
 class GameTime:
     def __init__(self):
-        self.seconds = 0
         self.minutes = 0
+        self.seconds = 0
         self.start_ticks = pygame.time.get_ticks()
 
     def start(self):
@@ -14,3 +14,6 @@ class GameTime:
 
     def get_time(self):
         return (f'{self.minutes} min : {self.seconds} sec')
+    
+    
+        

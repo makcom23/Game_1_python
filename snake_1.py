@@ -35,3 +35,10 @@ class Snake(AbstractSnake):
     def check(self):
         if self.apple_was_eaten():
             self.tail_count +=1
+
+    def is_intersect_apple(self):
+        if self.x == self.apl.x and self.y == self.apl.y:
+            return True
+        elif (self.apl.x, self.apl.y) in self.tail_pos:
+                return True
+        return False

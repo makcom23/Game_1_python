@@ -152,6 +152,8 @@ def start_game(apple, snake):
     settings.set_setting('direction', 'up')
     settings.set_setting('game_state', 2)
     settings.set_setting('score', 0)
+    
+    
 
 def terminate():
     pygame.quit()

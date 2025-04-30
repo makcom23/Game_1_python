@@ -7,7 +7,7 @@ import info_window as infwin
 
 
 class Window:
-    def __init__(self, surface, colors, settings, apple, start_game, snake):
+    def __init__(self, surface, colors, settings, apple, start_game, snake, gametime):
         
         self.surface = surface
         self.color = colors['COLOR_FIRSTWIND']
@@ -23,6 +23,7 @@ class Window:
         self.snake=snake
         self.start_game = start_game
         self.start_sound = pygame.mixer.Sound ("game_start.wav")
+        self.gametime = gametime
 
     def show(self, events):
         self.info_window.show_window(250,50)
@@ -37,7 +38,7 @@ class Window:
                         pygame.quit()
                         sys.exit()
                     elif self.btn2.is_active:
-                        self.start_game(self.apple, self.snake)
+                        self.start_game(self.apple, self.snake, self.gametime)
                         self.settings.set_setting('game_state', 2)
                         pygame.mixer.Sound.play(self.start_sound) # sound start game
                     elif self.btn1.is_active:

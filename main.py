@@ -77,7 +77,7 @@ def main():
     grd = grid.Grid(colors, DISPLAY, WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
     apple = apl.Apple(colors, DISPLAY, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT)
     snake = snk.Snake(DISPLAY, colors, CELL_SIZE, WINDOW_WIDTH, WINDOW_HEIGHT, settings, apple)
-    fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake)
+    fstwin = w.Window(DISPLAY, colors, settings, apple, start_game, snake, gametime)
     statbar = bar.StatusBar(DISPLAY, colors, settings, gametime)
     newplayer = np.NewPlayer(DISPLAY, settings, colors)
    
@@ -146,9 +146,10 @@ def game_results(settings):
     # Save the results to a file or database
     pass
 
-def start_game(apple, snake):
+def start_game(apple, snake, gametime):
     apple.create()
     snake.create(210, 510)
+    gametime.reset()
     settings.set_setting('direction', 'up')
     settings.set_setting('game_state', 2)
     settings.set_setting('score', 0)

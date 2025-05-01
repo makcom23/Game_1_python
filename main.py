@@ -100,8 +100,9 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                     elif game_state == 2:
                         game_results(settings)
                         settings.set_setting('game_state', 0)
-                    elif game_state == 3:
-                        settings.set_setting('game_state', 0)
+                    
+                if game_state == 3:
+                    settings.set_setting('game_state', 0)
 
                 if event.key == pygame.K_m:
                     if settings.get_setting('sound'):
@@ -139,7 +140,7 @@ def run_game(grd, apple, fstwin, statbar, newplayer, snake, gametime):
                 snake.show()
                 snake.check()
                 snake.tail_show()
-                snake.game_over()
+                snake.demo_game_over()
                 gametime.start()
 
 

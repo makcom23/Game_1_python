@@ -127,10 +127,24 @@ class AbstractSnake(ABC):
         self.check_borders()    
         self.pos = (self.x, self.y)
 
-        self.prev_head_pos = (self.x, self.y) # список кортежей tail_pos кограничить головой prev_head_pos и обрезать хвосты
+        self.prev_head_pos = (self.x, self.y) # обрезка хвоста
         self.tail_pos.insert(0, self.prev_head_pos) 
-        del self.tail_pos[self.tail_count+1:]
+        del self.tail_pos[self.tail_count+1:] 
 
+    def demo_game_over(self):
+        total_cells = self.window_width * (self.window_height-20) // self.cell_size**2
+        occupied_cells = len(self.tail_pos)
+        free_percent = ((total_cells - occupied_cells) / total_cells)*100  
+        if self.pos in self.tail_pos[1:]:
+            self.settings.set_setting('game_state', 3) # finish loose
+            self.create(210, 510)
+            self.apl.create()
+            self.move_demo()
+           
+        elif free_percent <= 95:
+            self.win() # finish win
+
+    
     @abstractmethod
     def move(self):
         pass

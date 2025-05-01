@@ -3,7 +3,7 @@ import pygame
 import random as rnd
 
 class Button:
-    def __init__(self, surface, text, width=300, height=50):
+    def __init__(self, surface, text, width=300, height=50, width2 = 150):
         self.surface = surface
         self.radius = 10
         self.COLOR_BORDER = (50, 80, 150)
@@ -13,6 +13,7 @@ class Button:
         self.font = pygame.font.Font(None, 36)
         self.text = text
         self.width = width
+        self.width2 = width2
         self.height = height
         self.is_active = False
 
@@ -29,6 +30,18 @@ class Button:
             pygame.draw.rect(self.surface, self.COLOR_BACKGROUND, (x, y, self.width, self.height), width=5, border_radius=5)
             pygame.draw.rect(self.surface, self.COLOR_BORDER, (x, y, self.width, self.height), width=1, border_radius=5)
         
+    def show_button2(self, x, y):
+        
+        img = self.font.render(self.text, True, self.COLOR_TEXT)
+        text_rectangle = img.get_rect()
+        x1 = x + (self.width2 - text_rectangle.width) // 2
+        y1 = y + (self.height - text_rectangle.height) // 2
+        self.surface.blit(img, (x1, y1))
+        if self.is_active:
+           pygame.draw.rect(self.surface, self.COLOR_SELECTED, (x, y, self.width2, self.height), width=5, border_radius=5)
+        else: 
+            pygame.draw.rect(self.surface, self.COLOR_BACKGROUND, (x, y, self.width2, self.height), width=5, border_radius=5)
+            pygame.draw.rect(self.surface, self.COLOR_BORDER, (x, y, self.width2, self.height), width=1, border_radius=5)
 
         
     def set_active(self, is_active):

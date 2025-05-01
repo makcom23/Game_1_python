@@ -38,7 +38,7 @@ class Snake(AbstractSnake):
         free_percent = ((total_cells - occupied_cells) / total_cells)*100  
         if self.pos in self.tail_pos[1:]:
             self.finish() # finish loose
-        elif free_percent <= 99:
+        elif free_percent <= 97:
             self.win() # finish win
    
     def check(self):

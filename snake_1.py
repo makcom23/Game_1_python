@@ -6,7 +6,7 @@ from abstract_snake import AbstractSnake
 
 class Snake(AbstractSnake):
     def __init__(self, surface, colors, cell_size, window_width, window_height, settings, apple):
-        super().__init__(surface, settings, window_width, window_height, colors, apple) 
+        super().__init__(surface, settings, window_width, window_height, colors, apple, cell_size) 
         self.vizible = False
         self.cell_size = cell_size
         self.half_cell = cell_size // 2
@@ -38,7 +38,7 @@ class Snake(AbstractSnake):
         free_percent = ((total_cells - occupied_cells) / total_cells)*100  
         if self.pos in self.tail_pos[1:]:
             self.finish() # finish loose
-        elif free_percent <= 97:
+        elif free_percent <= 95:
             self.win() # finish win
    
     def check(self):
@@ -83,3 +83,13 @@ class Snake(AbstractSnake):
         else:
             # exit
             self.settings.set_setting('game_state', 0)
+
+
+
+
+
+
+
+
+
+            

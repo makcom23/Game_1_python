@@ -47,6 +47,9 @@ class Window:
                     elif self.btn1.is_active:
                         self.settings.set_setting('game_state', 1)
                     elif self.btn4.is_active:
+                        self.start_game(self.apple, self.snake, self.gametime)
+                        if self.settings.get_setting('sound'):
+                            pygame.mixer.Sound.play(self.start_sound) # sound start game
                         self.settings.set_setting('game_state', 3) # demo
 
                 if event.key == pygame.K_UP:

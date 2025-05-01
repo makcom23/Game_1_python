@@ -4,7 +4,7 @@ import json
 
 class AbstractSnake(ABC):
 
-    def __init__(self, surface, settings, window_width, window_height, colors, apple):
+    def __init__(self, surface, settings, window_width, window_height, colors, apple, cell_size):
         self.surface = surface
         self.radius = 10
         self.eye = 2
@@ -20,6 +20,7 @@ class AbstractSnake(ABC):
         self.COLOR_STATUSBAR = colors['COLOR_STATUSBAR']
         self.apl = apple
         self.gameover = False
+        self.cell_size = cell_size
 
 
     @abstractmethod
@@ -115,7 +116,20 @@ class AbstractSnake(ABC):
         else:
             return False
         
+    # DEMO FUNCTION *******************************************************************
 
+    def move_demo(self):
+        if self.x != self.apl.x:
+            self.x = self.x + self.cell_size if self.x < self.apl.x else self.x - self.cell_size
+        elif self.y != self.apl.y:
+            self.y = self.y + self.cell_size if self.y < self.apl.y else self.y - self.cell_size
+
+        self.check_borders()    
+        self.pos = (self.x, self.y)
+
+        self.prev_head_pos = (self.x, self.y) # список кортежей tail_pos кограничить головой prev_head_pos и обрезать хвосты
+        self.tail_pos.insert(0, self.prev_head_pos) 
+        del self.tail_pos[self.tail_count+1:]
 
     @abstractmethod
     def move(self):
